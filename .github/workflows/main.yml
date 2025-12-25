@@ -1,6 +1,6 @@
 name: Deploy Website
 
-# Run workflow on pushes to main
+# Trigger workflow on push to main branch
 on:
   push:
     branches:
@@ -9,15 +9,16 @@ on:
 jobs:
   deploy:
     name: Deploy to GitHub Pages
-    uses: peaceiris/actions-gh-pages@v6
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout your repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Step 2: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v6
+        uses: peaceiris/actions-gh-pages@v6.4.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .  # your project root, adjust if files are in a folder like 'dist'
+          publish_dir: .    # Change this if your files are in a subfolder like 'dist/'
